@@ -44,19 +44,21 @@ echo "<br>";
 echo "A operação escolhida foi $operacao com os valores $valorA e $valorB e o resultado é $resultado e funcionou :)";
 }
 
+echo "<br>";
+echo "teste se voce pode ou não fazer a carteira de motorista <br>";
 // Testa se a pessoa pode fazer a carteira de motorista 
 // Precisa ser maior de 18 anos, e ter mais de R$1.000,00
-$idadePessoa = 5;
+$idadePessoa = 300;
 $dinheiroNaCarteira = 1000;
  
 if($idadePessoa >= 18 && $dinheiroNaCarteira >= 1000){
     echo "<br>";
     echo "Tu pode fazer a carteira meu nobre";
-}elseif ($idadePessoa <18 && $dinheiroNaCarteira <1000){
-    echo "sem dinherio e idade";
-}elseif ($idadePessoa >18 && $dinheiroNaCarteira <1000){
-    echo "sem dinheiro";
-}elseif ($idadePessoa <18 && $dinheiroNaCarteira >1000){
-    echo "sem idade"; 
+}elseif ($idadePessoa <18 && $dinheiroNaCarteira >= 1000){
+    echo "sem idade mas tem dinheiro";
+}elseif ($idadePessoa <18 && $dinheiroNaCarteira < 1000){
+    echo "sem idade e dinheiro";
+}elseif ($idadePessoa >= 18 && $dinheiroNaCarteira < 1000){
+    echo "tem idade mas não tem dinheiro";
 }
 ?>

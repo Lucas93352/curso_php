@@ -54,4 +54,21 @@ soma pares =
 soma impares = 
 */
 
+$numero = 1;
+$somaPares = 0;
+$somaImpares = 0;
+
+while ($numero <= 100) {
+    if ($numero % 2 == 0) {
+     
+        $somaPares += $numero;
+    } else {
+        
+        $somaImpares += $numero;
+    }
+    $numero++;
+}
+echo "Soma dos números pares =  " . $somaPares . "<br>";
+echo "Soma dos números ímpares = " . $somaImpares . "<br>";
+
 ?>

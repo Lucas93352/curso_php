@@ -68,7 +68,43 @@ while ($numero <= 100) {
     }
     $numero++;
 }
+echo "<br>";
+echo "<br> soma dos números impares e numeros pares é igual a:<br>";
 echo "Soma dos números pares =  " . $somaPares . "<br>";
 echo "Soma dos números ímpares = " . $somaImpares . "<br>";
 
+//outra forma de somar os numeros impares e pares usando o for 
+//zera o valor das variaveis usadas anteriormente para não causar um conflito 
+$somadospares = 0;
+$somadosimpares = 0;
+
+for ($i=1; $i <=100; $i++){
+    // aramazenar na variavel o resultado ou resto da sobra da divisão por 2
+    $resto = $i%2;
+    if ($resto == 0){   
+        //echo "o número $i é par " . "<br>"; 
+        $somadospares += $i;
+    } else {
+        //echo "o numero $i é impar<br>";
+        $somadosimpares += $i;
+    } 
+}
+
+echo "<br>";
+echo "a soma total dos pares é $somadospares<br>";
+echo "a soma total dos impares é $somadosimpares<br>";
+
+//criando um exemplo de laço de repetição dentro de outro 
+echo "<br> tabuada um pouco mais complexa<br>";
+for ($f=0; $f <=10; $f++){
+    echo "<br> tabuada do $f <br>";
+    for ($numero=0; $numero <=10; $numero++){
+    echo "numero: $f x $numero = ".$numero*$f."<br>";
+    }    
+}
+// calculo de horas vs dias
+// 8h por dia trabalhada, contrato de 100h
+for($horas=0; $horas <= 100; $horas++){
+
+}
 ?>

@@ -26,3 +26,25 @@ for ($i = 0; $i < $maxindice; $i++) {
 }
 
 echo implode(", ", $vetor);
+
+/*
+ Identificar o tipo de tringulo conforme os dados passados pelo usuário 
+ sendo tres medidas $a, $b, $c.
+ com essas medidas efetuar o calculo e informar ao usuário qual tipo
+ de triangulo que é formado pelas medidas que ele passou
+
+ triangulos a cosiderar: equilátero, Isoceles ou escaleno.
+*/
+
+echo "<br>";
+
+$lado1 = 1;
+$lado2 = 2;
+$lado3 = 1;
+
+if ($lado1 = $lado2 = $lado3){
+    echo "triangulo equilátero";
+}elseif ($lado1 > $lado2){
+    echo "triangulo isóceles";  
+}
+

@@ -40,11 +40,22 @@ echo "<br>";
 
 $lado1 = 1;
 $lado2 = 2;
-$lado3 = 1;
-
-if ($lado1 = $lado2 = $lado3){
+$lado3 = 3;
+echo "<br> descruba qual o tipo de trinagulo:";
+echo "<br> lados do triangulo escolhidos pelo o usuário:";
+echo "<br> lado 1 = " . $lado1; 
+echo "<br> lado 2 = " . $lado2; 
+echo "<br> lado 3 = " . $lado3; 
+echo "<br>";
+echo "O seu tipo de tringulo é um: ";
+if ($lado1 == $lado2 && $lado2 == $lado3){
     echo "triangulo equilátero";
-}elseif ($lado1 > $lado2){
+}elseif ($lado1 == $lado2 && $lado2 != $lado3 ){
     echo "triangulo isóceles";  
+}elseif ($lado1 != $lado2 && $lado2 != $lado3 && $lado1 != $lado3){
+    echo "triangulo escaleno";
+}elseif ($lado2 == $lado3){
+    echo "triangulo isóceles";
+}elseif ($lado1 == $lado3){
+    echo "triangulo isóceles";
 }
-

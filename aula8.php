@@ -11,20 +11,20 @@ $tamanho = count($vetor);
 $maxindice = $tamanho - 1;
 
 for ($i = 0; $i < $maxindice; $i++) {
-
+     // Loop para percorrer todos os elementos do array
     $maxIndice_J = $tamanho - $i - 1;
 
     for ($j = 0; $j < $maxIndice_J; $j++) {
-
+         // Loop para percorrer o array do início até o penúltimo elemento não ordenado
         if ($vetor[$j] > $vetor[$j + 1]) {
-            // Troca os elementos para ordenar corretamente
+            // Troca os elementos para ordenar corretamente se estiverem na ordem errada 
             $temp = $vetor[$j];
             $vetor[$j] = $vetor[$j + 1];
             $vetor[$j + 1] = $temp;
         }
     }
 }
-
+//implode = implodir um vetor
 echo implode(", ", $vetor);
 
 /*
@@ -39,8 +39,8 @@ echo implode(", ", $vetor);
 echo "<br>";
 
 $lado1 = 1;
-$lado2 = 2;
-$lado3 = 3;
+$lado2 = 1;
+$lado3 = 1;
 echo "<br> descruba qual o tipo de trinagulo:";
 echo "<br> lados do triangulo escolhidos pelo o usuário:";
 echo "<br> lado 1 = " . $lado1; 

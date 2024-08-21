@@ -46,18 +46,38 @@ depósito, saque, estrato(saldoatual)
 
 echo "<br>simulação de um sistema bancário<br>";
 
-function caixa ($operacao, $quantiedade){
-    $saldoatual = 1000;
+$saldoAtual = 1000;
 
-    if ($operacao == "saque"){
-        $saldoatual = $saldoatual - $quantiedade;
-    }elseif ($operacao == "deposito"){
-        $saldoatual = $saldoatual + $quantiedade;
-    }elseif ($operacao == "extrato"){
-        return $saldoatual;
+function caixa ($operacao, $quantiedade, &$saldoAtual){
+
+    if ($operacao == "saque" && ($quantiedade > $saldoAtual || $quantiedade <= 0)){
+        return "não é possível sacar ";
+    }elseif ($operacao == "saque"){
+        $saldoAtual = $saldoAtual - $quantiedade;
+    }
+    
+    if ($operacao == "deposito" && ($quantiedade <= 0 || $quantiedade == '')){
+        return "não é permitido depósito em branco";
+    }elseif ($operacao == "deposito" ){
+        $saldoAtual = $saldoAtual + $quantiedade;
+    }
+    
+    if ($operacao == "extrato"){
+        return $saldoAtual;
     }
 
-    return $saldoatual;
+    return $saldoAtual;
 }
 
-echo caixa("extrato", 0); 
+// '' || 0
+
+echo caixa("extrato", 0, $saldoAtual); 
+echo "<br>";
+echo caixa("deposito", 0, $saldoAtual); 
+echo "<br>";
+echo caixa("saque", -1, $saldoAtual); 
+
+
+
+
+

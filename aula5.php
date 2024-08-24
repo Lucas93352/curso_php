@@ -98,7 +98,7 @@ echo "a soma total dos impares é $somadosimpares<br>";
 echo "<br> tabuada um pouco mais complexa<br>";
 for ($f=0; $f <=10; $f++){
     echo "<br> tabuada do $f <br>";
-    for ($numero=0; $numero <=10; $numero++){
+    for ($numero=0; $numero <=11; $numero++){
     echo "numero: $f x $numero = ".$numero*$f."<br>";
     }    
 }

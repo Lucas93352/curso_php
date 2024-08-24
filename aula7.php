@@ -76,8 +76,16 @@ echo "os números pares de 100 a 1 é: <br>";
 for ($i = count($vetorPar); $i >=0; $i--){ //devemos inverter o que está sendo executado começando do 100 até o 0 
     echo $vetorPar[$i]. ", ";
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> e81cd53b96628bd58daa02c9b389a747b55bea5f
 echo "<br>";
 echo "os números Impares de 100 a 1 é: <br>";
 for ($i = count($vetorImpar); $i >=0; $i--){ //devemos inverter o que está sendo executado começando do 100 até o 0 
     echo $vetorImpar[$i]. ", ";
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> e81cd53b96628bd58daa02c9b389a747b55bea5f

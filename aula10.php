@@ -12,7 +12,7 @@ function validarCPF($cpf){
     $cpf = preg_replace("/[^0-9]/", "", $cpf);
      // Verifica se o CPF tem exatamente 11 dígitos
      if (strlen($cpf) != 11) {
-        return "CPF inválido";
+        return false;
     }
 
     $digitoUm = 0;
@@ -35,16 +35,46 @@ function validarCPF($cpf){
     } 
  
     if ($calculoUm == $cpf[9] && $calculoDois == $cpf[10]){
-        return "o cpf é valido";
+        return true;
     }else{
-        return "o cpf é invalido";
+        return false;
     }
 }
+  
+function addMasckCPF($cpf){
+    $CPFMasck = "";
+    $masckCPF = "###.###.###-##"; // ###.###.###.## => 12345678910
+
+    $j = 0;
+
+    for ($i= 0; $i < strlen($masckCPF); $i++){
+
+        if ($masckCPF[$i] == '#') {
+            $CPFMasck .= $cpf[$j]; // "1" => "123"
+            $j++;
+        } else {
+            $CPFMasck .= $masckCPF[$i]; // 123.
+        }
+    }
+
+    return $CPFMasck;
+}
+
     
     $cpf = '730.426.500-04';
-    echo "o cpf informado pelo usuário é: " . $cpf . "<br>"; 
     $resultado = validarCPF($cpf);
-    echo $resultado;
+    $cpf = preg_replace("/[^0-9]/", "", $cpf);
+    $cpf = addMasckCPF($cpf);
+    
+    if ($resultado) {
+        echo "O CPF: " . $cpf . " é valido";
+    } else {
+        echo "O CPF: " . $cpf . " é invalido";
+    }
+    
+    
+
+
 
     //validador de CNPJ
 
@@ -52,7 +82,7 @@ function validarCPF($cpf){
     $cnpj = preg_replace("/[^0-9]/", "", $cnpj);
     
     if (strlen($cnpj) != 14) {
-        return "CNPJ inválido";
+        return false;
     }
     $digitoUm = 0;
     $digitoDois = 0;
@@ -80,13 +110,39 @@ function validarCPF($cpf){
     $resto = $digitoDois % 11;
     $digitoDois = $resto < 2 ? 0 : 11 - $resto;
     if ($digitoUm == $cnpj[12] && $digitoDois == $cnpj[13]) {
-        return "CNPJ é válido";
+        return true;
     } else {
-        return "CNPJ é inválido";
+        return false;
     }
 }
+
+function addMasckCNPJ ($cnpj){
+    $cnpjMasck = "";
+    $masckCNPJ = "###.###.###-##"; // ###.###.###.## => 12345678910
+
+    $j = 0;
+
+    for ($i= 0; $i < strlen($masckCNPJ); $i++){
+
+        if ($masckCNPJ[$i] == '#') {
+            $cnpjMasck .= $cnpj[$j]; // "1" => "123"
+            $j++;
+        } else {
+            $cnpjMasck .= $masckCNPJ[$i]; // 123.
+        }
+    }
+
+    return $cnpjMasck;
+}
+
 echo "<br>";
 $cnpj = "08.199.996/0066-73";
-echo "o cnpj informado pelo usuário é: " . $cnpj . "<br>"; 
-$resultado = validarCNPJ($cnpj);
-echo $resultado; 
+$cnpj = preg_replace("/[^0-9]/", "", $cnpj);
+$resultado = validarCPF($cnpj);
+$cnpj = addMasckCNPJ ($cnpj);
+    if ($resultado) {
+        echo "O CPF: " . $cnpj . " é valido";
+    } else {
+        echo "O CPF: " . $cnpj . " é invalido";
+    }
+   

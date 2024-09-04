@@ -79,42 +79,42 @@ function addMasckCPF($cpf){
     //validador de CNPJ
 
     function validarCNPJ($cnpj){
-    $cnpj = preg_replace("/[^0-9]/", "", $cnpj);
-    
-    if (strlen($cnpj) != 14) {
-        return false;
-    }
-    $digitoUm = 0;
-    $digitoDois = 0;
-    for ($i = 5, $x = 9, $n = 0; $n <= 11 ; $n++) {
-        if ($i >= 2) {
-            $digitoUm += $cnpj[$n] * $i;
-            $i--;
+        $cnpj = preg_replace("/[^0-9]/", "", $cnpj);
+        
+        if (strlen($cnpj) != 14) {
+            return false;
+        }
+        $digitoUm = 0;
+        $digitoDois = 0;
+        for ($i = 5, $x = 9, $n = 0; $n <= 11 ; $n++) {
+            if ($i >= 2) {
+                $digitoUm += $cnpj[$n] * $i;
+                $i--;
+            } else {
+                $digitoUm += $cnpj[$n] * $x;
+                $x--;
+            }
+        }
+        $resto = $digitoUm % 11;
+        $digitoUm = $resto < 2 ? 0 : 11 - $resto;
+        
+        for ($i = 6, $x = 9, $n = 0; $n <= 12; $n++) {
+            if ($i >= 2) {
+                $digitoDois += $cnpj[$n] * $i;
+                $i--;
+            } else {
+                $digitoDois += $cnpj[$n] * $x;
+                $x--;
+            }
+        }
+        $resto = $digitoDois % 11;
+        $digitoDois = $resto < 2 ? 0 : 11 - $resto;
+        if ($digitoUm == $cnpj[12] && $digitoDois == $cnpj[13]) {
+            return true;
         } else {
-            $digitoUm += $cnpj[$n] * $x;
-            $x--;
+            return false;
         }
     }
-    $resto = $digitoUm % 11;
-    $digitoUm = $resto < 2 ? 0 : 11 - $resto;
-    
-    for ($i = 6, $x = 9, $n = 0; $n <= 12; $n++) {
-        if ($i >= 2) {
-            $digitoDois += $cnpj[$n] * $i;
-            $i--;
-        } else {
-            $digitoDois += $cnpj[$n] * $x;
-            $x--;
-        }
-    }
-    $resto = $digitoDois % 11;
-    $digitoDois = $resto < 2 ? 0 : 11 - $resto;
-    if ($digitoUm == $cnpj[12] && $digitoDois == $cnpj[13]) {
-        return true;
-    } else {
-        return false;
-    }
-}
 
 function addMasckCNPJ ($cnpj){
     $cnpjMasck = "";

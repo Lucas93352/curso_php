@@ -58,57 +58,118 @@ Criar objetos as oparações matemáticas + - * /
 
 //recriando o sistema de banco deverá ter todas as operações 
 
-Class Banco{
+// Class Banco{
+
+//     public $saldoAtual = 1000;
+
+//     public function saque($quantiedade){
+
+//         if ($quantiedade <= 0){
+//             return "O usuário não pode sacar um valor menor que zero";
+//         }
+
+//         if ($quantiedade > $this->saldoAtual){
+//             return "O usuário não pode sacar um valor maior que o saldo atual";
+//         }
+
+//         $this->saldoAtual -= $quantiedade;
+//     }
+
+//     public function deposito($quantiedade){
+
+//         if ($quantiedade <= 0){
+//             return "O usuário não pode depositar";
+//         }
+
+//         if ($quantiedade == ' ');{
+//             return "O usuário não pode depositar";
+//         }
+
+//         $this->saldoAtual +=  $quantiedade;
+//     }
+
+//     public function extrato(){
+//         return $this->saldoAtual;
+//     }
+
+//     public function transferencia($quantiedade, $destinatario){
+
+//         if ($quantiedade <= 0){
+//             return "não é possivel realizar a Transferência";
+//         }
+
+//         if ($quantiedade > $this->saldoAtual){
+//             return "não é possivel realizr a Transferência";
+//         }
+    
+//         $this->saldoAtual -= $quantiedade;
+
+//         $this->transfCompleta($destinatario, $quantiedade);
+//     }
+
+//     private function transfCompleta($destinatario, $quantiedade) {
+//         return "Transferência concluída" ;
+//     }
+// }
+
+// $banco = new Banco();
+// $banco->saque(100);
+// echo "Saldo após saque: " . $banco->extrato() . "\n";
+// echo "<br>";
+// $banco->deposito(500);
+// echo "Saldo após depósito: " . $banco->extrato() . "\n";
+// echo "<br>";
+// echo $banco->transferencia(200, 'Conta do João') . "\n";
+// echo "Saldo após transferência: " . $banco->extrato();
+// echo "<br>";
+
+class Banco {
 
     public $saldoAtual = 1000;
 
-    public function saque($quantiedade){
-
-        if ($quantiedade <= 0){
-            return "O usuário não pode sacar um valor menor que zero";
+    public function saque($quantidade) {
+        if ($quantidade <= 0) {
+            return "O usuário não pode sacar um valor menor ou igual a zero";
         }
 
-        if ($quantiedade > $this->saldoAtual){
+        if ($quantidade > $this->saldoAtual) {
             return "O usuário não pode sacar um valor maior que o saldo atual";
         }
 
-        $this->saldoAtual -= $quantiedade;
+        $this->saldoAtual -= $quantidade;
     }
 
-    public function deposito($quantiedade){
-
-        if ($quantiedade <= 0){
-            return "O usuário não pode depositar";
+    public function deposito($quantidade) {
+        if ($quantidade <= 0 || $quantidade =='') {
+            return "O usuário não pode depositar um valor menor ou igual a zero";
         }
 
-        if ($quantiedade == ' ');{
-            return "O usuário não pode depositar";
-        }
-
-        $this->saldoAtual +=  $quantiedade;
+        $this->saldoAtual += $quantidade;
     }
 
-    public function extrato(){
+    public function extrato() {
         return $this->saldoAtual;
     }
 
-    public function transferencia($quantiedade, $destinatario){
-
-        if ($quantiedade <= 0){
-            return "não é possivel realizar a Transferência";
+    public function transferencia($quantidade, $destinatario) {
+        if ($quantidade <= 0) {
+            return "Não é possível realizar a transferência de um valor menor ou igual a zero";
+        }
+        if ($destinatario == '') {
+            return "informe um destinatário";
         }
 
-        if ($quantiedade > $this->saldoAtual){
-            return "não é possivel realizr a Transferência";
-        }
-    
-        $this->saldoAtual -= $quantiedade;
 
-        $this->transfCompleta($destinatario, $quantiedade);
+        if ($quantidade > $this->saldoAtual) {
+            return "Não é possível realizar a transferência. Saldo insuficiente";
+        }
+
+        $this->saldoAtual -= $quantidade;
+        return $this->transfCompleta($destinatario, $quantidade);
     }
 
-    private function transfCompleta($destinatario, $quantiedade) {
-        return "Transferência concluída" ;
+    private function transfCompleta($destinatario, $quantidade) {
+        return "Transferência de $quantidade para $destinatario concluída";
     }
 }
 
@@ -122,3 +183,4 @@ echo "<br>";
 echo $banco->transferencia(200, 'Conta do João') . "\n";
 echo "Saldo após transferência: " . $banco->extrato();
 echo "<br>";
+?>

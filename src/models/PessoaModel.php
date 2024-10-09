@@ -2,7 +2,7 @@
 
 require_once './src/Conexao.php';
 
-class UsuarioPessoa {
+class PessoaModel {
 
     private $fields = [
         'id',

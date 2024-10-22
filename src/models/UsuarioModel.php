@@ -1,70 +1,53 @@
 <?php
 
-require_once './src/Conexao.php';
+require '../database/Conexao.php';
 
-class UsuarioModel {
+class UsuarioModel extends BaseModel {
 
-    private $table = "Usuario";
+    private $table = 'Usuario';
+    
     private $fields = [
-        'id',
         'cpf',
         'email',
         'senha',
-        'excluido',
-        'usuario_alteracao',
-        'data_criacao',
-        'data_atalizacao',
     ];
 
     public function create($values) {
 
-        $fieldsLocal = $this->fields;
+        $this->createAdjust($this->fields, $values);
 
-        unset($fieldsLocal['id']);
-        unset($fieldsLocal['usuario_alteracao']);
-        unset($fieldsLocal['data_criacao']);
-        unset($fieldsLocal['data_atalizacao']);
+        $sql = ("INSERT INTO {$this->table} ({$this->fieldsSTR}) VALUES ({$this->valuesSTR});");
+        // INSERT INTO {$this->table} ('cpf','email','senha','excluido') VALUES ('546546654', 'fulanmo@email.com'...)
 
-        $fieldsSTR = implode(',',$fieldsLocal);
-        $valuesSTR = implode(',', $values);
-    
-        $sql = ("INSERT INTO ($$this->table) ($fieldsSTR) VALUES ({$valuesSTR});");
     }
 
     public function read($id) {
+        
+        // 'id','excluido','usuario_alteracao','data_criacao','data_atualizacao','cpf','email','senha';
+        $this->readAdjust($this->fields);
 
-        $fieldsSTR = implode(',', $this->fields);
-    
-        $sql = ("SELEC ($fieldsSTR) FROM {$this ->table} WHERE id = ($id);");
+        // SELECT * FROM Usuario WHERE id = 14;
+        $sql = ("SELECT {$this->fieldsSTR} FROM {$this->table} WHERE id = {$id} LIMIT 1;");
     }
 
-    public function readAll() {
+    public function readAll($page = 20) {
+        
+        $this->readAdjust($this->fields);
 
-        $fieldsSTR = implode(',', $this->fields);
-    
-        $sql = ("SELEC ($fieldsSTR) FROM {$this ->table}");   // ele esta selecionando todas as colunas da tabla 
+        $sql = ("SELECT {$this->fieldsSTR} FROM {$this->table} LIMIT {$page};");
     }
 
-    public function update($id, $values) {
+    public function update($id, array $values) {
 
-        $fieldsLocal = $this->fields;
+        $this->updateAdjust($values);
 
-        unset($fieldsLocal['id']);
-        unset($fieldsLocal['usuario_alteracao']);
-        unset($fieldsLocal['data_criacao']);
-        unset($fieldsLocal['data_atalizacao']);
+        $sql = ("UPDATE {$this->table} SET $this->fieldsSTR WHERE id = {$id};");
+        // UPDATE USUARIOS SET cpf = '123456', email = 'novoEmail@trallala.com' WHERE id = 1;
 
-        foreach($values as $key => $value) {
-            $fieldsLocal[$key] = $value[$key];
-        }
-
-        $fieldsSTR = implode(',', $fieldsLocal);
-
-        $sql = ("UPDATE {$$this->table} SET $fieldsSTR WHERE ID = {$id};");
     }
 
     public function delete($id) {
-        $sql = ("DELET FROM {$this->table} WHERE id ($id);");
+        $sql = ("DELETE FROM {$this->table} WHERE id = {$id};");
     }
-    
+
 }

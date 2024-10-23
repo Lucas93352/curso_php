@@ -60,9 +60,6 @@ class UsuarioController {
             }else{
                 return false;
             }
-        }
-          
-        private function validaEmail($cpf){
             $CPFMasck = "";
             $masckCPF = "###.###.###-##"; // ###.###.###.## => 12345678910
         

@@ -1,7 +1,13 @@
 <?php
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+require_once "../database/Conexao.php";
+
 abstract class BaseModel {
 
+    private $conexao = null;
     public $fieldsSTR = '';
     public $valuesSTR ='';
 
@@ -12,7 +18,11 @@ abstract class BaseModel {
         'data_criacao',
         'data_atualizacao',
     ];
-
+    public function __construct()
+    {
+        global $conexao;
+        $this->conexao = $conexao;
+    }
     public function createAdjust($fields, $values) {
 
         $this->fieldsSTR = implode(',', $fields) . ", excluido"; // cpf, email, senha, excluido
@@ -39,5 +49,25 @@ abstract class BaseModel {
 
         // remove a virgula extra no final.
         $this->fieldsSTR = str_replace(',', '', $this->fieldsSTR, -1);
+    }
+
+    private function getData($result){
+
+        $dados = [];
+
+        if($result && $result->num_rows > 0){
+            while ($row = $result->fetch_assoc()){
+                $dados[] = $row;
+            }
+        }
+    }
+
+    public function execute($sql)
+    {
+        $result = $this->conexao->query($sql);
+
+        $result = $this->getData($result);
+
+        return $result ?? [];
     }
 }

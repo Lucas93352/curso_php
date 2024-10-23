@@ -92,7 +92,7 @@ class UsuarioController {
             }
              return true; // A senha é válida
             }
-        private function validarEmail($email){
+        private function validaEmail($email){
                 // Verifica se o formato do e-mail é válido
                 if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
                     // Verifica se o domínio tem um registro MX válido

@@ -49,7 +49,7 @@ class UsuarioModel extends BaseModel {
 
         $this->updateAdjust($values);
 
-        $sql = ("UPDATE {$this->table} SET $this->fieldsSTR WHERE id = {$id};");
+        $sql = ("UPDATE {$this->table} SET $this->fieldsSTR WHERE id = '{$id}';");
         // UPDATE USUARIOS SET cpf = '123456', email = 'novoEmail@trallala.com' WHERE id = 1;
 
         return $this->execute($sql);
@@ -61,16 +61,36 @@ class UsuarioModel extends BaseModel {
         return $this->execute($sql);
     }
 
+    public function deleteMany($ids) {
+        $ids = implode(",", $ids);
+
+        $sql = ("DELETE FROM {$this->table} WHERE id IN ({$ids});");
+
+        return $this->execute($sql);
+    }
 }
 
-$usuario = new UsuarioModel();
+$usuarioModel = new UsuarioModel();
 
-$dados = $usuario->readAll();
+$dadosUsuario = [
+    'cpf' => '01234546789',
+    'email' => 'emaildoemail@gmail.com',
+    'senha' => '1234'
+];
+
+$usuarioModel->delete(3);
+
+$dados = $usuarioModel->readAll();
 
 if ( !empty($dados) ) {
 
-    foreach($dados[0] as $field => $value) {
-
-        echo "{$field}: {$value} <br>";
+    foreach($dados as $idx => $registro) {
+        
+        foreach($registro as $field => $value) {
+    
+            echo "{$field}: {$value} <br>";
+        }
+    echo "<br>";
     }
+
 }
